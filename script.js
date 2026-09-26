@@ -2,10 +2,6 @@
 // Ajustez l'heure ici si besoin (ex. "T15:00:00+02:00" pour la cérémonie).
 const WEDDING_DATE = new Date("2027-10-23T00:00:00+02:00");
 
-// Adresse Formspree qui reçoit les réponses RSVP (ex. "https://formspree.io/f/abcdwxyz").
-// Tant qu'elle est vide, le formulaire indique que les réponses ne sont pas encore ouvertes.
-const RSVP_ENDPOINT = "";
-
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ---------- Compte à rebours ---------- */
@@ -68,98 +64,6 @@ const ics = [
 
 document.getElementById("add-calendar").href =
   "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
-
-/* ---------- Formulaire RSVP ---------- */
-
-const rsvp = document.getElementById("rsvp");
-const form = document.getElementById("rsvp-form");
-const ifYes = form.querySelector(".if-yes");
-const errorBox = document.getElementById("rsvp-error");
-
-if ("IntersectionObserver" in window) {
-  new IntersectionObserver((entries, obs) => {
-    if (entries[0].isIntersecting) {
-      rsvp.classList.add("visible");
-      obs.disconnect();
-    }
-  }, { threshold: 0.15 }).observe(rsvp);
-} else {
-  rsvp.classList.add("visible");
-}
-
-form.addEventListener("input", () => { errorBox.hidden = true; });
-
-form.addEventListener("change", (e) => {
-  if (e.target.name === "presence") ifYes.hidden = e.target.value !== "oui";
-  if (e.target.matches("[aria-invalid]")) e.target.removeAttribute("aria-invalid");
-});
-
-function showError(message) {
-  errorBox.textContent = message;
-  errorBox.hidden = false;
-}
-
-function validate() {
-  let first = null;
-  for (const input of form.querySelectorAll("#rsvp-name, #rsvp-email")) {
-    const ok = input.checkValidity() && input.value.trim() !== "";
-    if (ok) input.removeAttribute("aria-invalid");
-    else input.setAttribute("aria-invalid", "true");
-    first ||= ok ? null : input;
-  }
-  if (first) {
-    showError("Merci d'indiquer votre nom et une adresse e-mail valide.");
-    first.focus();
-    return false;
-  }
-  if (!form.presence.value) {
-    showError("Merci de nous dire si vous serez présent·e.");
-    return false;
-  }
-  return true;
-}
-
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  errorBox.hidden = true;
-  if (!validate()) return;
-
-  if (!RSVP_ENDPOINT) {
-    showError("Les réponses ne sont pas encore ouvertes, revenez très bientôt !");
-    return;
-  }
-
-  const data = new FormData(form);
-  if (data.get("presence") === "non") {
-    data.delete("personnes");
-    data.delete("regime");
-  }
-  data.append("_subject", `RSVP mariage : ${data.get("nom")} (${data.get("presence")})`);
-
-  const button = form.querySelector("button");
-  button.disabled = true;
-  button.textContent = "Envoi…";
-
-  try {
-    const res = await fetch(RSVP_ENDPOINT, {
-      method: "POST",
-      body: data,
-      headers: { Accept: "application/json" },
-    });
-    if (!res.ok) throw new Error(res.status);
-
-    const coming = data.get("presence") === "oui";
-    document.getElementById("rsvp-thanks-text").textContent = coming
-      ? "Nous avons hâte de fêter ce jour avec vous le 23 octobre 2027 !"
-      : "Vous nous manquerez, merci d'avoir pris le temps de répondre.";
-    form.hidden = true;
-    document.getElementById("rsvp-thanks").hidden = false;
-  } catch {
-    showError("Oups, l'envoi n'a pas fonctionné. Merci de réessayer dans un instant.");
-    button.disabled = false;
-    button.textContent = "Envoyer ma réponse";
-  }
-});
 
 function rand(min, max) {
   return min + Math.random() * (max - min);

@@ -316,7 +316,6 @@ body {
   /* laisse passer la pointe de l'épée */
   margin-top: calc(16px + 7%);
 }
-.actions .break { flex-basis: 100%; height: 0; }
 
 .btn {
   position: relative;
@@ -348,138 +347,6 @@ body {
 }
 .btn:hover::after, .btn:focus-visible::after { transform: translateX(120%); }
 .btn-ghost { background: transparent; color: var(--parchment); }
-
-/* ---------- RSVP ---------- */
-
-html { scroll-behavior: smooth; }
-
-.rsvp {
-  position: relative;
-  z-index: 3; /* au-dessus des lucioles et des feuilles */
-  width: 100%;
-  margin: 56px auto 0;
-  padding: 64px 36px 44px;
-  max-width: 520px;
-  color: var(--sepia);
-  background:
-    radial-gradient(ellipse at 30% 20%, rgba(255, 250, 235, .6), transparent 60%),
-    radial-gradient(ellipse at 80% 90%, rgba(170, 140, 100, .25), transparent 60%),
-    var(--parchment);
-  border-radius: 50% 50% 10px 10px / 90px 90px 10px 10px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, .5), 0 0 60px rgba(255, 220, 150, .12);
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
-}
-.rsvp.visible { opacity: 1; transform: none; }
-
-/* Double filet gravé, comme la bordure du faire-part */
-.rsvp::before {
-  content: "";
-  position: absolute;
-  inset: 12px;
-  border: 1px solid rgba(90, 74, 58, .55);
-  outline: 1px solid rgba(90, 74, 58, .3);
-  outline-offset: -5px;
-  border-radius: inherit;
-  pointer-events: none;
-}
-
-.rsvp h2 {
-  margin: 0;
-  font-family: var(--script);
-  font-weight: 400;
-  font-size: clamp(2.1rem, 8vw, 2.8rem);
-  line-height: 1.1;
-  color: var(--wine);
-}
-.rsvp-intro {
-  margin: 8px 0 26px;
-  font-style: italic;
-  font-size: 1.1rem;
-}
-
-#rsvp-form {
-  position: relative;
-  display: grid;
-  gap: 18px;
-  text-align: left;
-}
-
-.field { display: grid; gap: 6px; margin: 0; border: 0; padding: 0; }
-.field > label, .field legend {
-  font-family: var(--caps);
-  font-size: .78rem;
-  letter-spacing: .08em;
-  color: var(--rust);
-}
-
-.rsvp input:not([type="radio"]), .rsvp select, .rsvp textarea {
-  width: 100%;
-  padding: 8px 2px;
-  border: 0;
-  border-bottom: 1px solid rgba(90, 74, 58, .5);
-  background: transparent;
-  color: var(--wine);
-  font: 1.15rem var(--old);
-  border-radius: 0;
-  transition: border-color .2s, box-shadow .2s;
-}
-.rsvp textarea { resize: vertical; }
-.rsvp input::placeholder { color: rgba(90, 74, 58, .5); font-style: italic; }
-.rsvp input:focus, .rsvp select:focus, .rsvp textarea:focus {
-  outline: none;
-  border-bottom-color: var(--wine);
-  box-shadow: 0 1px 0 var(--wine);
-}
-.rsvp [aria-invalid="true"] { border-bottom-color: #b3261e !important; }
-
-.choice { display: flex; flex-wrap: wrap; gap: 10px; }
-.choice legend { width: 100%; margin-bottom: 6px; }
-.choice label { cursor: pointer; }
-.choice input { position: absolute; opacity: 0; }
-.choice span {
-  display: inline-block;
-  font-family: var(--old);
-  padding: 8px 18px;
-  border: 1px solid rgba(110, 27, 27, .45);
-  border-radius: 999px;
-  font-size: 1.05rem;
-  color: var(--wine);
-  transition: background .2s, color .2s;
-}
-.choice input:checked + span { background: var(--wine); color: var(--parchment); }
-.choice input:focus-visible + span { outline: 2px solid var(--rust); outline-offset: 2px; }
-
-.if-yes { display: grid; gap: 18px; animation: rise .5s ease-out; }
-
-.hp { position: absolute; left: -9999px; }
-
-.form-error { margin: 0; color: #9b2c1f; font-style: italic; }
-
-#rsvp-form .btn {
-  justify-self: center;
-  margin-top: 6px;
-  border-color: var(--wine);
-  background: var(--wine);
-  color: var(--parchment);
-  font-size: .85rem;
-  cursor: pointer;
-}
-#rsvp-form .btn[disabled] { opacity: .6; cursor: wait; }
-
-.rsvp-thanks { animation: rise .8s ease-out; }
-.thanks-title {
-  margin: 0;
-  font-family: var(--script);
-  font-size: 3rem;
-  color: var(--wine);
-}
-.rsvp-thanks p:last-child { font-size: 1.15rem; font-style: italic; }
-
-@media (max-width: 420px) {
-  .rsvp { padding: 56px 22px 36px; border-radius: 50% 50% 10px 10px / 60px 60px 10px 10px; }
-}
 
 /* ---------- Animations ---------- */
 
@@ -523,5 +390,4 @@ html { scroll-behavior: smooth; }
     animation-delay: 0s !important;
   }
   .leaves, .sparkle { display: none; }
-  .rsvp { opacity: 1; transform: none; transition: none; }
 }
