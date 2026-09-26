@@ -85,14 +85,13 @@ body {
   background: radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(5, 10, 3, .65) 100%);
 }
 
-.rays {
+/* Forêt enchantée en fond, avec un lent zoom */
+.backdrop {
   position: absolute;
-  inset: -20% -20% 0;
-  background: repeating-conic-gradient(from 160deg at 50% -5%,
-    rgba(255, 240, 190, .06) 0deg 3deg, transparent 3deg 11deg);
-  mask-image: linear-gradient(180deg, #000 0%, transparent 70%);
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 70%);
-  animation: rays 16s ease-in-out infinite alternate;
+  inset: -3%;
+  background: url("images/foret.webp") 50% 40% / cover no-repeat;
+  filter: saturate(1.1) brightness(.85);
+  animation: breathe-bg 30s ease-in-out infinite alternate;
 }
 
 /* Lumière magique derrière le parchemin */
@@ -103,20 +102,9 @@ body {
   width: min(1100px, 170vw);
   aspect-ratio: 1;
   translate: -50% -50%;
-  background: radial-gradient(circle, rgba(255, 226, 160, .30) 0%, rgba(230, 190, 110, .12) 30%, transparent 62%);
+  background: radial-gradient(circle, rgba(255, 226, 160, .22) 0%, rgba(230, 190, 110, .08) 30%, transparent 62%);
   animation: halo 7s ease-in-out infinite alternate;
 }
-
-.forest {
-  position: absolute;
-  left: -5%;
-  bottom: 0;
-  width: 110%;
-  transform-origin: bottom center;
-}
-.forest-far  { height: 70%; fill: #34552a; opacity: .45; animation: sway 16s ease-in-out infinite alternate; }
-.forest-mid  { height: 52%; fill: #152a0d; opacity: .9;  animation: sway 12s ease-in-out infinite alternate-reverse; }
-.forest-near { height: 30%; fill: #070f04;               animation: sway 9s ease-in-out infinite alternate; }
 
 .mist {
   position: absolute;
@@ -365,9 +353,8 @@ body {
   0%, 70%, 100% { opacity: 0; transform: scale(.3) rotate(0deg); }
   80%           { opacity: 1; transform: scale(1) rotate(45deg); }
 }
-@keyframes rays  { from { opacity: .5; transform: rotate(-2deg); } to { opacity: 1; transform: rotate(2deg); } }
 @keyframes halo  { from { opacity: .75; scale: .95; } to { opacity: 1; scale: 1.05; } }
-@keyframes sway  { from { transform: skewX(-.8deg); } to { transform: skewX(.8deg); } }
+@keyframes breathe-bg { from { transform: scale(1); } to { transform: scale(1.06) translateX(-1%); } }
 @keyframes drift { from { transform: translateX(0); } to { transform: translateX(25%); } }
 @keyframes fall {
   0%   { transform: translate(0, 0) rotate(0deg); }
@@ -378,7 +365,8 @@ body {
 }
 
 @media (max-width: 600px) {
-  .forest-near { height: 16%; }
+  /* Sur mobile, la porte lumineuse se place derrière le faire-part */
+  .backdrop    { background-position: 72% 40%; }
   .mist-front  { height: 24%; }
 }
 

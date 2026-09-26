@@ -7,16 +7,15 @@
   <meta name="description" content="Save the Date : le mariage de Sophie &amp; Mathieu le 23 octobre 2027 au Domaine de Fourniol à Septfonds.">
   <meta name="theme-color" content="#1e3111">
   <link rel="preload" href="images/faire-part.webp" as="image">
+  <link rel="preload" href="images/foret.webp" as="image">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Décor derrière le faire-part : rayons, halo, forêt, brume -->
+  <!-- Décor derrière le faire-part : forêt enchantée, halo, brume -->
   <div class="scene scene-back" aria-hidden="true">
-    <div class="rays"></div>
-    <svg class="forest forest-far" preserveAspectRatio="none"></svg>
+    <div class="backdrop"></div>
     <div class="halo"></div>
     <div class="mist mist-back"></div>
-    <svg class="forest forest-mid" preserveAspectRatio="none"></svg>
     <div class="leaves"></div>
   </div>
 
@@ -66,10 +65,9 @@
     </div>
   </main>
 
-  <!-- Décor devant le faire-part : brume, arbres proches, lucioles -->
+  <!-- Décor devant le faire-part : brume, lucioles, feuilles -->
   <div class="scene scene-front" aria-hidden="true">
     <div class="mist mist-front"></div>
-    <svg class="forest forest-near" preserveAspectRatio="none"></svg>
     <canvas id="fireflies"></canvas>
     <div class="leaves"></div>
   </div>
