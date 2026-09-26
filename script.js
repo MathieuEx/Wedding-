@@ -65,14 +65,102 @@ const ics = [
 document.getElementById("add-calendar").href =
   "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
 
+/* ---------- Forêt : sapins et feuillus générés ---------- */
+
 function rand(min, max) {
   return min + Math.random() * (max - min);
 }
 
+function svgPath(svg, d) {
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("d", d);
+  svg.appendChild(path);
+}
+
+// Dessiné en pixels réels pour que les arbres gardent leurs proportions.
+function drawForest(svg, { count, minH, maxH, gap }) {
+  const W = Math.round(svg.clientWidth), H = Math.round(svg.clientHeight);
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  svg.replaceChildren();
+  minH = (minH / 100) * H;
+  maxH = (maxH / 100) * H;
+
+  let pines = `M0 ${H} `;
+  let trunks = "";
+  let crowns = "";
+  const step = W / count;
+  const circle = (cx, cy, r) =>
+    `M${cx - r} ${cy} a${r} ${r} 0 1 0 ${2 * r} 0 a${r} ${r} 0 1 0 ${-2 * r} 0 `;
+
+  for (let i = 0; i <= count; i++) {
+    const x = i * step + rand(-step / 3, step / 3);
+    // Laisse une clairière au centre pour ne pas masquer le faire-part.
+    if (gap && x > W * gap[0] && x < W * gap[1]) continue;
+    const h = rand(minH, maxH);
+    const top = H - h;
+
+    if (Math.random() < 0.45) {
+      // Feuillu : tronc + couronne ronde faite de plusieurs cercles.
+      const r = h * rand(0.2, 0.26);
+      const tw = Math.max(3, r * 0.22);
+      trunks += `M${x - tw / 2} ${H} L${x - tw / 2} ${top + r} L${x + tw / 2} ${top + r} L${x + tw / 2} ${H} Z `;
+      const cy = top + r * 1.3;
+      crowns += circle(x, cy, r);
+      crowns += circle(x - r * 0.75, cy + r * 0.45, r * 0.75);
+      crowns += circle(x + r * 0.75, cy + r * 0.4, r * 0.8);
+      crowns += circle(x, cy - r * 0.55, r * 0.7);
+      continue;
+    }
+
+    // Sapin en étages : chaque étage déborde un peu du précédent.
+    const w = h * rand(0.4, 0.55);
+    const tiers = 4;
+    pines += `L${x - w / 2} ${H} `;
+    for (let t = tiers; t >= 1; t--) {
+      const y = top + (h * (tiers - t + 1)) / (tiers + 0.6);
+      const half = (w / 2) * (1 - (t - 1) / (tiers + 1));
+      pines += `L${x - half} ${y} L${x - half * 0.55} ${y - h * 0.04} `;
+    }
+    pines += `L${x} ${top} `;
+    for (let t = 1; t <= tiers; t++) {
+      const y = top + (h * (tiers - t + 1)) / (tiers + 0.6);
+      const half = (w / 2) * (1 - (t - 1) / (tiers + 1));
+      pines += `L${x + half * 0.55} ${y - h * 0.04} L${x + half} ${y} `;
+    }
+    pines += `L${x + w / 2} ${H} `;
+  }
+  pines += `L${W} ${H} Z`;
+
+  // Chemins séparés pour éviter que les formes superposées ne s'annulent.
+  svgPath(svg, pines);
+  if (trunks) svgPath(svg, trunks);
+  if (crowns) svgPath(svg, crowns);
+}
+
+const forests = [
+  [".forest-far", { count: 26, minH: 45, maxH: 95 }],
+  [".forest-mid", { count: 16, minH: 55, maxH: 100 }],
+  [".forest-near", { count: 12, minH: 60, maxH: 100, gap: [0.3, 0.7] }],
+];
+
+function drawForests() {
+  for (const [sel, opts] of forests) drawForest(document.querySelector(sel), opts);
+}
+
+drawForests();
+let lastWidth = innerWidth;
+addEventListener("resize", () => {
+  // Ignore les petits redimensionnements (barre d'adresse mobile).
+  if (Math.abs(innerWidth - lastWidth) < 40) return;
+  lastWidth = innerWidth;
+  drawForests();
+});
+
 /* ---------- Feuilles d'érable et de chêne qui tombent ---------- */
 
 if (!reduceMotion) {
-  const leaves = document.querySelector(".leaves");
+  const back = document.querySelector(".scene-back .leaves");
+  const front = document.querySelector(".scene-front .leaves");
   const colors = ["#d9622b", "#c8893a", "#b5402a", "#e8a33d", "#8f3f2a", "#f0c470", "#a0522d"];
   for (let i = 0; i < 24; i++) {
     const leaf = document.createElement("span");
@@ -82,7 +170,7 @@ if (!reduceMotion) {
     leaf.style.setProperty("--d", `${rand(12, 22)}s`);
     leaf.style.setProperty("--delay", `${-rand(0, 22)}s`);
     leaf.style.scale = rand(0.6, 1.2).toFixed(2);
-    leaves.appendChild(leaf);
+    (i % 4 === 0 ? front : back).appendChild(leaf);
   }
 }
 

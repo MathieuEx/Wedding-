@@ -46,7 +46,6 @@ body {
   place-items: center;
   padding: 24px 12px 32px;
   overflow-x: hidden;
-  background: var(--forest);
   color: var(--sepia);
   font-family: var(--old);
   text-align: center;
@@ -63,12 +62,75 @@ body {
 
 /* ---------- Décor ---------- */
 
+body {
+  background:
+    radial-gradient(ellipse at 50% 40%, #2c4a1c 0%, #1e3111 45%, #0f1c08 100%);
+  background-attachment: fixed;
+}
+
 .scene {
   position: fixed;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
 }
+.scene-back  { z-index: 0; }
+.scene-front { z-index: 2; }
+
+/* Vignette sombre sur les bords */
+.scene-back::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(5, 10, 3, .65) 100%);
+}
+
+.rays {
+  position: absolute;
+  inset: -20% -20% 0;
+  background: repeating-conic-gradient(from 160deg at 50% -5%,
+    rgba(255, 240, 190, .06) 0deg 3deg, transparent 3deg 11deg);
+  mask-image: linear-gradient(180deg, #000 0%, transparent 70%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 70%);
+  animation: rays 16s ease-in-out infinite alternate;
+}
+
+/* Lumière magique derrière le parchemin */
+.halo {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  width: min(1100px, 170vw);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  background: radial-gradient(circle, rgba(255, 226, 160, .30) 0%, rgba(230, 190, 110, .12) 30%, transparent 62%);
+  animation: halo 7s ease-in-out infinite alternate;
+}
+
+.forest {
+  position: absolute;
+  left: -5%;
+  bottom: 0;
+  width: 110%;
+  transform-origin: bottom center;
+}
+.forest-far  { height: 70%; fill: #34552a; opacity: .45; animation: sway 16s ease-in-out infinite alternate; }
+.forest-mid  { height: 52%; fill: #152a0d; opacity: .9;  animation: sway 12s ease-in-out infinite alternate-reverse; }
+.forest-near { height: 30%; fill: #070f04;               animation: sway 9s ease-in-out infinite alternate; }
+
+.mist {
+  position: absolute;
+  left: -50%;
+  width: 200%;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(225, 235, 205, .20), transparent 60%),
+    radial-gradient(ellipse at 55% 60%, rgba(225, 235, 205, .16), transparent 55%),
+    radial-gradient(ellipse at 85% 40%, rgba(225, 235, 205, .18), transparent 60%);
+  filter: blur(10px);
+}
+.mist-back  { bottom: 25%; height: 35%; animation: drift 40s linear infinite alternate; }
+/* Brume devant le bas du parchemin : c'est elle qui le fond dans la forêt */
+.mist-front { bottom: -6%; height: 34%; animation: drift 30s linear infinite alternate-reverse; }
 
 #fireflies {
   position: absolute;
@@ -113,6 +175,7 @@ body {
   display: block;
   width: 100%;
   height: auto;
+  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, .45)) drop-shadow(0 0 40px rgba(255, 220, 150, .12));
 }
 
 /* Zone libre du parchemin, sous « Nous nous marions » */
@@ -126,6 +189,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  mix-blend-mode: multiply; /* le texte prend le grain du papier */
 }
 .content > * { margin: 0; }
 
@@ -301,12 +365,21 @@ body {
   0%, 70%, 100% { opacity: 0; transform: scale(.3) rotate(0deg); }
   80%           { opacity: 1; transform: scale(1) rotate(45deg); }
 }
+@keyframes rays  { from { opacity: .5; transform: rotate(-2deg); } to { opacity: 1; transform: rotate(2deg); } }
+@keyframes halo  { from { opacity: .75; scale: .95; } to { opacity: 1; scale: 1.05; } }
+@keyframes sway  { from { transform: skewX(-.8deg); } to { transform: skewX(.8deg); } }
+@keyframes drift { from { transform: translateX(0); } to { transform: translateX(25%); } }
 @keyframes fall {
   0%   { transform: translate(0, 0) rotate(0deg); }
   25%  { transform: translate(40px, 25vh) rotate(120deg); }
   50%  { transform: translate(-30px, 55vh) rotate(260deg); }
   75%  { transform: translate(35px, 80vh) rotate(380deg); }
   100% { transform: translate(-10px, 110vh) rotate(520deg); }
+}
+
+@media (max-width: 600px) {
+  .forest-near { height: 16%; }
+  .mist-front  { height: 24%; }
 }
 
 @media (prefers-reduced-motion: reduce) {

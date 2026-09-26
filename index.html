@@ -10,9 +10,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Décor animé : lucioles et feuilles d'automne sur fond vert forêt -->
-  <div class="scene" aria-hidden="true">
-    <canvas id="fireflies"></canvas>
+  <!-- Décor derrière le faire-part : rayons, halo, forêt, brume -->
+  <div class="scene scene-back" aria-hidden="true">
+    <div class="rays"></div>
+    <svg class="forest forest-far" preserveAspectRatio="none"></svg>
+    <div class="halo"></div>
+    <div class="mist mist-back"></div>
+    <svg class="forest forest-mid" preserveAspectRatio="none"></svg>
     <div class="leaves"></div>
   </div>
 
@@ -61,6 +65,14 @@
       <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Domaine+de+Fourniol+Septfonds" target="_blank" rel="noopener">Voir sur la carte</a>
     </div>
   </main>
+
+  <!-- Décor devant le faire-part : brume, arbres proches, lucioles -->
+  <div class="scene scene-front" aria-hidden="true">
+    <div class="mist mist-front"></div>
+    <svg class="forest forest-near" preserveAspectRatio="none"></svg>
+    <canvas id="fireflies"></canvas>
+    <div class="leaves"></div>
+  </div>
 
   <script src="script.js"></script>
 </body>
