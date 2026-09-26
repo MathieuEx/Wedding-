@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mathieu &amp; Sophie — Save the Date</title>
   <meta name="description" content="Save the Date : le mariage de Mathieu &amp; Sophie le 23 octobre 2027 au Domaine de Fourniol à Septfonds.">
-  <meta name="theme-color" content="#06140f">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#1a0f0a">
+  <link rel="preload" href="fonts/unifrakturmaguntia-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,6 +20,15 @@
     <svg class="forest forest-mid" preserveAspectRatio="none"></svg>
     <div class="mist mist-front"></div>
     <svg class="forest forest-near" preserveAspectRatio="none"></svg>
+    <svg class="mushrooms mushrooms-left" viewBox="0 0 120 60">
+      <g class="shroom"><rect x="22" y="30" width="8" height="30" rx="3"/><path d="M6 34 q20 -34 40 0z"/></g>
+      <g class="shroom" style="--delay:1.2s"><rect x="54" y="40" width="6" height="20" rx="3"/><path d="M42 43 q15 -24 30 0z"/></g>
+      <g class="shroom" style="--delay:2.1s"><rect x="84" y="46" width="4" height="14" rx="2"/><path d="M76 48 q10 -16 20 0z"/></g>
+    </svg>
+    <svg class="mushrooms mushrooms-right" viewBox="0 0 120 60">
+      <g class="shroom" style="--delay:.6s"><rect x="80" y="32" width="7" height="28" rx="3"/><path d="M66 36 q17 -30 35 0z"/></g>
+      <g class="shroom" style="--delay:1.8s"><rect x="46" y="44" width="5" height="16" rx="2"/><path d="M36 47 q12 -20 25 0z"/></g>
+    </svg>
     <canvas id="fireflies"></canvas>
     <div class="leaves"></div>
   </div>
@@ -40,7 +47,7 @@
 
     <p class="eyebrow reveal">Save the Date</p>
     <p class="subtitle reveal">Nous nous marions !</p>
-    <h1 class="title reveal">Mathieu <span class="amp">&amp;</span> Sophie</h1>
+    <h1 class="title reveal"><span>Mathieu</span> <span class="amp">&amp;</span> <span>Sophie</span></h1>
 
     <div class="divider reveal" aria-hidden="true">
       <svg viewBox="0 0 40 24"><path d="M20 2 C 12 8, 12 16, 20 22 C 28 16, 28 8, 20 2z M20 6 V 20" /></svg>

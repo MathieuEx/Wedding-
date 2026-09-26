@@ -1,14 +1,39 @@
+/* Polices auto-hébergées (SIL OFL, voir fonts/README.txt) */
+@font-face {
+  font-family: "UnifrakturMaguntia";
+  src: url("fonts/unifrakturmaguntia-latin-400-normal.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "IM Fell English";
+  src: url("fonts/im-fell-english-latin-400-normal.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "IM Fell English";
+  src: url("fonts/im-fell-english-latin-400-italic.woff2") format("woff2");
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cinzel Decorative";
+  src: url("fonts/cinzel-decorative-latin-400-normal.woff2") format("woff2");
+  font-display: swap;
+}
+
 :root {
-  --night: #06140f;
-  --night-2: #0c2a20;
-  --moss: #1f4a37;
-  --ink: #f3ead3;
-  --muted: #b9c7b4;
-  --gold: #e6c77a;
-  --gold-deep: #b8913f;
-  --glow: rgba(255, 226, 140, .55);
-  --glass: rgba(10, 32, 24, .55);
-  --line: rgba(230, 199, 122, .35);
+  --night: #1a0f0a;
+  --ink: #f6e7c8;
+  --muted: #d6b98f;
+  --gold: #f0c470;
+  --gold-deep: #c47f2c;
+  --ember: #d9622b;
+  --glow: rgba(255, 190, 100, .55);
+  --glass: rgba(38, 20, 12, .58);
+  --line: rgba(240, 196, 112, .38);
+  --old: "IM Fell English", "Garamond", "Georgia", serif;
+  --caps: "Cinzel Decorative", "IM Fell English", serif;
+  --gothic: "UnifrakturMaguntia", "Old English Text MT", serif;
 }
 
 * { box-sizing: border-box; }
@@ -26,8 +51,7 @@ body {
   overflow-x: hidden;
   background: var(--night);
   color: var(--ink);
-  font-family: "Montserrat", system-ui, sans-serif;
-  font-weight: 300;
+  font-family: var(--old);
   text-align: center;
 }
 
@@ -39,42 +63,45 @@ body {
   overflow: hidden;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 50% 15%, #1d4a3c 0%, transparent 60%),
-    linear-gradient(180deg, #0a2a24 0%, #0b2219 45%, var(--night) 100%);
+    radial-gradient(ellipse at 80% 18%, rgba(255, 170, 80, .22) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 85%, rgba(230, 110, 40, .35) 0%, transparent 60%),
+    linear-gradient(180deg, #1b1a2e 0%, #3a2233 30%, #6b3322 58%, #2a140c 80%, var(--night) 100%);
 }
 
 .stars {
   position: absolute;
-  inset: 0 0 40% 0;
+  inset: 0 0 55% 0;
   background-image:
     radial-gradient(1px 1px at 10% 20%, #fff8 50%, transparent 51%),
     radial-gradient(1px 1px at 25% 8%, #fff9 50%, transparent 51%),
     radial-gradient(1.5px 1.5px at 40% 30%, #fffa 50%, transparent 51%),
     radial-gradient(1px 1px at 60% 12%, #fff8 50%, transparent 51%),
-    radial-gradient(1px 1px at 72% 26%, #fff7 50%, transparent 51%),
-    radial-gradient(1.5px 1.5px at 88% 10%, #fff9 50%, transparent 51%),
-    radial-gradient(1px 1px at 93% 34%, #fff6 50%, transparent 51%),
-    radial-gradient(1px 1px at 5% 40%, #fff6 50%, transparent 51%);
+    radial-gradient(1px 1px at 72% 36%, #fff7 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 92% 6%, #fff9 50%, transparent 51%),
+    radial-gradient(1px 1px at 5% 45%, #fff6 50%, transparent 51%);
   animation: twinkle 5s ease-in-out infinite alternate;
 }
 
+/* Lune des moissons */
 .moon {
   position: absolute;
-  top: 7%;
+  top: 8%;
   right: 12%;
-  width: clamp(70px, 10vw, 120px);
+  width: clamp(80px, 11vw, 130px);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle at 38% 35%, #fffbe8, #f1e2b0 60%, #d9c388);
-  box-shadow: 0 0 40px 10px rgba(255, 240, 190, .35), 0 0 140px 50px rgba(255, 230, 160, .15);
+  background:
+    radial-gradient(circle at 30% 60%, rgba(190, 110, 40, .25) 0 12%, transparent 13%),
+    radial-gradient(circle at 62% 38%, rgba(190, 110, 40, .2) 0 8%, transparent 9%),
+    radial-gradient(circle at 38% 35%, #fff1c8, #f7c874 60%, #e39a45);
   animation: moon-glow 6s ease-in-out infinite alternate;
 }
 
 .rays {
   position: absolute;
   inset: -20% -10% 0;
-  background: repeating-conic-gradient(from 200deg at 82% 10%,
-    rgba(255, 240, 200, .06) 0deg 4deg, transparent 4deg 14deg);
+  background: repeating-conic-gradient(from 200deg at 82% 12%,
+    rgba(255, 200, 130, .07) 0deg 4deg, transparent 4deg 14deg);
   mask-image: linear-gradient(180deg, #000 0%, transparent 75%);
   -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 75%);
   animation: rays 14s ease-in-out infinite alternate;
@@ -87,9 +114,9 @@ body {
   width: 110%;
   transform-origin: bottom center;
 }
-.forest-far  { height: 62%; fill: #0f3327; opacity: .9;  animation: sway 16s ease-in-out infinite alternate; }
-.forest-mid  { height: 48%; fill: #0a2519;              animation: sway 12s ease-in-out infinite alternate-reverse; }
-.forest-near { height: 34%; fill: #040e0a;              animation: sway 9s ease-in-out infinite alternate; }
+.forest-far  { height: 60%; fill: #7a3b1f; opacity: .55; animation: sway 16s ease-in-out infinite alternate; }
+.forest-mid  { height: 46%; fill: #43200f;              animation: sway 12s ease-in-out infinite alternate-reverse; }
+.forest-near { height: 32%; fill: #150a05;              animation: sway 9s ease-in-out infinite alternate; }
 
 .mist {
   position: absolute;
@@ -97,13 +124,28 @@ body {
   width: 200%;
   height: 30%;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(200, 235, 215, .16), transparent 60%),
-    radial-gradient(ellipse at 55% 60%, rgba(200, 235, 215, .12), transparent 55%),
-    radial-gradient(ellipse at 85% 40%, rgba(200, 235, 215, .14), transparent 60%);
+    radial-gradient(ellipse at 20% 50%, rgba(255, 210, 160, .16), transparent 60%),
+    radial-gradient(ellipse at 55% 60%, rgba(255, 200, 150, .12), transparent 55%),
+    radial-gradient(ellipse at 85% 40%, rgba(255, 210, 160, .14), transparent 60%);
   filter: blur(8px);
 }
 .mist-back  { bottom: 30%; animation: drift 40s linear infinite alternate; }
-.mist-front { bottom: 8%;  animation: drift 28s linear infinite alternate-reverse; opacity: .8; }
+.mist-front { bottom: 6%;  animation: drift 28s linear infinite alternate-reverse; opacity: .85; }
+
+/* Champignons lumineux */
+.mushrooms {
+  position: absolute;
+  bottom: 0;
+  width: clamp(110px, 14vw, 180px);
+}
+.mushrooms-left  { left: 2%; }
+.mushrooms-right { right: 2%; }
+.shroom rect { fill: #f3dcc0; opacity: .85; }
+.shroom path {
+  fill: #ff9a4d;
+  filter: drop-shadow(0 0 6px #ffb070);
+  animation: shroom-glow 3.5s ease-in-out var(--delay, 0s) infinite alternate;
+}
 
 #fireflies {
   position: absolute;
@@ -112,23 +154,23 @@ body {
   height: 100%;
 }
 
+/* Feuilles d'érable et de chêne qui tombent */
 .leaf {
   position: absolute;
   top: -40px;
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
   background: var(--c, #c8893a);
-  border-radius: 0 70% 0 70%;
-  opacity: .85;
+  opacity: .9;
+  -webkit-mask: var(--shape) center / contain no-repeat;
+  mask: var(--shape) center / contain no-repeat;
   animation: fall var(--d, 14s) linear var(--delay, 0s) infinite;
 }
-.leaf::after {
-  content: "";
-  position: absolute;
-  inset: 50% 0 auto 0;
-  height: 1px;
-  background: rgba(0, 0, 0, .25);
-  transform: rotate(45deg);
+.leaf.maple {
+  --shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 1l2 5 3-2-1 5 4-1-2 4 4 2-6 2 1 3-4-1v5h-2v-5l-4 1 1-3-6-2 4-2-2-4 4 1-1-5 3 2z'/%3E%3C/svg%3E");
+}
+.leaf.oak {
+  --shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 1c2 1 3 3 2 4 2 0 3 2 2 3 2 0 3 2 1 4 2 1 1 3-1 3 1 2-1 3-3 2 0 2-1 3-2 3v3h-1v-3c-1 0-2-1-2-3-2 1-4 0-3-2-2 0-3-2-1-3-2-2-1-4 1-4-1-1 0-3 2-3-1-1 0-3 2-4z'/%3E%3C/svg%3E");
 }
 
 /* ---------- Carte ---------- */
@@ -138,16 +180,18 @@ body {
   z-index: 1;
   width: 100%;
   max-width: 640px;
-  padding: 56px 32px 44px;
-  background: var(--glass);
+  padding: 58px 32px 46px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(240, 160, 80, .12), transparent 60%),
+    var(--glass);
   -webkit-backdrop-filter: blur(10px) saturate(120%);
   backdrop-filter: blur(10px) saturate(120%);
   border: 1px solid var(--line);
   border-radius: 28px 28px 28px 28px / 40px 40px 40px 40px;
   box-shadow:
-    0 0 0 6px rgba(6, 20, 15, .35),
-    0 30px 80px rgba(0, 0, 0, .55),
-    inset 0 0 60px rgba(230, 199, 122, .06);
+    0 0 0 6px rgba(26, 15, 10, .4),
+    0 30px 80px rgba(0, 0, 0, .6),
+    inset 0 0 60px rgba(240, 196, 112, .07);
   animation: card-in 1.4s cubic-bezier(.2, .8, .2, 1) both;
 }
 
@@ -170,63 +214,64 @@ body {
   animation: draw 2.4s ease-out .6s forwards;
 }
 .vine-leaves path {
-  fill: #6f9a5c;
   opacity: 0;
   transform-box: fill-box;
   transform-origin: center;
   animation: bloom .8s ease-out forwards;
 }
-.vine-leaves path:nth-child(1) { animation-delay: 1.2s; }
-.vine-leaves path:nth-child(2) { animation-delay: 1.5s; }
+.vine-leaves path:nth-child(1) { animation-delay: 1.2s; fill: #c7562a; }
+.vine-leaves path:nth-child(2) { animation-delay: 1.5s; fill: #e0a03c; }
 .vine-leaves path:nth-child(3) { animation-delay: 1.8s; fill: var(--gold); }
-.vine-leaves path:nth-child(4) { animation-delay: 2.1s; }
-.vine-leaves path:nth-child(5) { animation-delay: 2.4s; }
+.vine-leaves path:nth-child(4) { animation-delay: 2.1s; fill: #9c3b22; }
+.vine-leaves path:nth-child(5) { animation-delay: 2.4s; fill: #d77a2e; }
 
 .reveal {
   opacity: 0;
   animation: rise 1s ease-out forwards;
 }
-.eyebrow.reveal        { animation-delay: .5s; }
-.subtitle.reveal       { animation-delay: .75s; }
-.title.reveal          { animation-delay: 1s; }
-.divider.reveal        { animation-delay: 1.3s; }
-.date.reveal           { animation-delay: 1.5s; }
-.place.reveal          { animation-delay: 1.7s; }
-.countdown.reveal      { animation-delay: 1.95s; }
-.actions.reveal        { animation-delay: 2.2s; }
-.note.reveal           { animation-delay: 2.4s; }
+.eyebrow.reveal   { animation-delay: .5s; }
+.subtitle.reveal  { animation-delay: .75s; }
+.divider.reveal   { animation-delay: 1.5s; }
+.date.reveal      { animation-delay: 1.7s; }
+.place.reveal     { animation-delay: 1.9s; }
+.countdown.reveal { animation-delay: 2.1s; }
+.actions.reveal   { animation-delay: 2.35s; }
+.note.reveal      { animation-delay: 2.55s; }
 
 .eyebrow {
   margin: 0;
-  letter-spacing: .4em;
-  text-transform: uppercase;
-  font-size: .78rem;
+  font-family: var(--caps);
+  letter-spacing: .3em;
+  font-size: .85rem;
   color: var(--gold);
 }
 
 .subtitle {
-  margin: 14px 0 0;
-  font-family: "Cormorant Garamond", serif;
+  margin: 12px 0 0;
   font-style: italic;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: var(--muted);
 }
 
+/* Prénoms en écriture gothique ancienne, dorés à la feuille */
 .title {
-  margin: 6px 0 0;
-  font-family: "Great Vibes", cursive;
+  margin: 10px 0 0;
+  font-family: var(--gothic);
   font-weight: 400;
-  font-size: clamp(3rem, 12vw, 5rem);
+  font-size: clamp(2.8rem, 11vw, 4.6rem);
   line-height: 1.15;
-  background: linear-gradient(100deg, #c9a24e 0%, #fff2c4 25%, #e6c77a 45%, #fff7d6 60%, #c9a24e 80%);
+  background: linear-gradient(100deg, #b86a22 0%, #ffe6a8 22%, #f0c470 40%, #fff3cf 55%, #d18a35 75%, #b86a22 100%);
   background-size: 250% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 14px rgba(255, 220, 130, .35));
+  filter: drop-shadow(0 2px 0 rgba(60, 25, 8, .6)) drop-shadow(0 0 16px rgba(255, 180, 90, .35));
 }
-.title.reveal { animation: rise 1s ease-out 1s forwards, shimmer 6s linear 2s infinite; }
-.title .amp { display: inline-block; }
+.title.reveal {
+  animation: ink-in 1.6s ease-out 1s forwards, shimmer 7s linear 2.6s infinite;
+}
+.title span { display: inline-block; }
+.title .amp { font-size: .8em; padding: 0 .1em; }
 
 .divider {
   display: flex;
@@ -246,7 +291,7 @@ body {
 .divider svg {
   width: 30px;
   height: 20px;
-  fill: none;
+  fill: rgba(217, 98, 43, .5);
   stroke: var(--gold);
   stroke-width: 1.4;
   filter: drop-shadow(0 0 6px var(--glow));
@@ -254,25 +299,21 @@ body {
 
 .date {
   margin: 0;
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(1.5rem, 5vw, 2rem);
-  font-weight: 600;
+  font-size: clamp(1.55rem, 5vw, 2.1rem);
   letter-spacing: .02em;
 }
 
 .place {
-  margin: 12px 0 0;
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.35rem;
+  margin: 10px 0 0;
+  font-size: 1.4rem;
   font-style: italic;
   color: var(--gold);
 }
 .place span {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--caps);
   font-style: normal;
-  font-size: .8rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
+  font-size: .78rem;
+  letter-spacing: .16em;
   color: var(--muted);
 }
 
@@ -288,8 +329,8 @@ body {
   padding: 18px 4px 14px;
   border: 1px solid var(--line);
   border-radius: 50% 50% 14px 14px / 28px 28px 14px 14px;
-  background: linear-gradient(180deg, rgba(31, 74, 55, .55), rgba(6, 20, 15, .6));
-  box-shadow: inset 0 0 20px rgba(230, 199, 122, .08);
+  background: linear-gradient(180deg, rgba(120, 55, 25, .5), rgba(26, 15, 10, .65));
+  box-shadow: inset 0 0 20px rgba(240, 196, 112, .08);
   animation: breathe 4s ease-in-out infinite;
 }
 .unit:nth-child(2) { animation-delay: .5s; }
@@ -298,11 +339,10 @@ body {
 
 .unit span {
   display: block;
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(2rem, 8vw, 3rem);
-  font-weight: 600;
+  font-family: var(--caps);
+  font-size: clamp(1.7rem, 7vw, 2.7rem);
   line-height: 1;
-  color: #fff6dc;
+  color: #fff1d6;
   font-variant-numeric: tabular-nums;
   text-shadow: 0 0 12px var(--glow);
 }
@@ -311,14 +351,14 @@ body {
 .unit small {
   display: block;
   margin-top: 8px;
+  font-family: var(--caps);
   font-size: .62rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
+  letter-spacing: .14em;
   color: var(--muted);
 }
 
 .done {
-  font-family: "Great Vibes", cursive;
+  font-family: var(--gothic);
   font-size: 2.6rem;
   color: var(--gold);
   text-shadow: 0 0 18px var(--glow);
@@ -341,13 +381,12 @@ body {
   border: 1px solid var(--gold);
   border-radius: 999px;
   background: linear-gradient(135deg, var(--gold), var(--gold-deep));
-  color: #10231a;
+  color: #2a140a;
   text-decoration: none;
-  font-size: .72rem;
-  font-weight: 400;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  box-shadow: 0 0 18px rgba(230, 199, 122, .25);
+  font-family: var(--caps);
+  font-size: .78rem;
+  letter-spacing: .12em;
+  box-shadow: 0 0 18px rgba(240, 170, 90, .3);
   transition: transform .25s, box-shadow .25s;
 }
 .btn::after {
@@ -360,23 +399,23 @@ body {
 }
 .btn:hover, .btn:focus-visible {
   transform: translateY(-2px);
-  box-shadow: 0 0 28px rgba(255, 220, 130, .5);
+  box-shadow: 0 0 28px rgba(255, 180, 90, .55);
 }
 .btn:hover::after, .btn:focus-visible::after { transform: translateX(120%); }
 .btn-ghost { background: transparent; color: var(--gold); }
 
 .note {
   margin: 30px 0 0;
-  font-family: "Cormorant Garamond", serif;
   font-style: italic;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: var(--muted);
 }
 
 @media (max-width: 420px) {
-  .card { padding: 48px 18px 38px; }
+  .card { padding: 50px 18px 40px; }
   .countdown { gap: 8px; }
-  .unit small { font-size: .52rem; letter-spacing: .1em; }
+  .unit small { font-size: .5rem; letter-spacing: .06em; }
+  .btn { font-size: .72rem; }
 }
 
 /* ---------- Animations ---------- */
@@ -389,6 +428,11 @@ body {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: none; }
 }
+/* Les prénoms apparaissent comme de l'encre qui se dépose */
+@keyframes ink-in {
+  0%   { opacity: 0; letter-spacing: .12em; transform: scale(.96); }
+  100% { opacity: 1; letter-spacing: 0; transform: none; }
+}
 @keyframes shimmer {
   from { background-position: 100% 0; }
   to   { background-position: -150% 0; }
@@ -399,17 +443,21 @@ body {
   to   { opacity: 1; transform: none; }
 }
 @keyframes breathe {
-  0%, 100% { box-shadow: inset 0 0 20px rgba(230, 199, 122, .08), 0 0 0 rgba(255, 220, 130, 0); }
-  50%      { box-shadow: inset 0 0 24px rgba(230, 199, 122, .16), 0 0 18px rgba(255, 220, 130, .18); }
+  0%, 100% { box-shadow: inset 0 0 20px rgba(240, 196, 112, .08), 0 0 0 rgba(255, 170, 90, 0); }
+  50%      { box-shadow: inset 0 0 24px rgba(240, 196, 112, .16), 0 0 18px rgba(255, 170, 90, .22); }
 }
 @keyframes tick {
-  0%   { transform: translateY(-6px); opacity: .3; text-shadow: 0 0 24px #fff3c0; }
+  0%   { transform: translateY(-6px); opacity: .3; text-shadow: 0 0 24px #ffd9a0; }
   100% { transform: none; opacity: 1; }
 }
-@keyframes twinkle   { from { opacity: .5; } to { opacity: 1; } }
+@keyframes twinkle { from { opacity: .4; } to { opacity: 1; } }
 @keyframes moon-glow {
-  from { box-shadow: 0 0 40px 10px rgba(255, 240, 190, .3), 0 0 120px 40px rgba(255, 230, 160, .12); }
-  to   { box-shadow: 0 0 55px 16px rgba(255, 240, 190, .42), 0 0 170px 60px rgba(255, 230, 160, .2); }
+  from { box-shadow: 0 0 40px 10px rgba(255, 190, 110, .3), 0 0 120px 40px rgba(255, 150, 70, .14); }
+  to   { box-shadow: 0 0 55px 16px rgba(255, 190, 110, .42), 0 0 170px 60px rgba(255, 150, 70, .22); }
+}
+@keyframes shroom-glow {
+  from { opacity: .55; }
+  to   { opacity: 1; filter: drop-shadow(0 0 12px #ffb070); }
 }
 @keyframes rays  { from { opacity: .5; transform: rotate(-1.5deg); } to { opacity: 1; transform: rotate(1.5deg); } }
 @keyframes sway  { from { transform: skewX(-.8deg); } to { transform: skewX(.8deg); } }

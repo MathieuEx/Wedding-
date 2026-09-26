@@ -65,48 +65,74 @@ const ics = [
 document.getElementById("add-calendar").href =
   "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
 
-/* ---------- Forêt : silhouettes de sapins générées ---------- */
+/* ---------- Forêt : sapins et feuillus générés ---------- */
 
 function rand(min, max) {
   return min + Math.random() * (max - min);
 }
 
-// Dessiné en pixels réels pour que les sapins gardent leurs proportions.
+function svgPath(svg, d) {
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("d", d);
+  svg.appendChild(path);
+}
+
+// Dessiné en pixels réels pour que les arbres gardent leurs proportions.
 function drawForest(svg, { count, minH, maxH }) {
   const W = Math.round(svg.clientWidth), H = Math.round(svg.clientHeight);
   svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
   svg.replaceChildren();
   minH = (minH / 100) * H;
   maxH = (maxH / 100) * H;
-  let d = `M0 ${H} `;
+
+  let pines = `M0 ${H} `;
+  let trunks = "";
+  let crowns = "";
   const step = W / count;
+  const circle = (cx, cy, r) =>
+    `M${cx - r} ${cy} a${r} ${r} 0 1 0 ${2 * r} 0 a${r} ${r} 0 1 0 ${-2 * r} 0 `;
 
   for (let i = 0; i <= count; i++) {
     const x = i * step + rand(-step / 3, step / 3);
     const h = rand(minH, maxH);
-    const w = h * rand(0.4, 0.55);
     const top = H - h;
-    const tiers = 4;
+
+    if (Math.random() < 0.45) {
+      // Feuillu : tronc + couronne ronde faite de plusieurs cercles.
+      const r = h * rand(0.2, 0.26);
+      const tw = Math.max(3, r * 0.22);
+      trunks += `M${x - tw / 2} ${H} L${x - tw / 2} ${top + r} L${x + tw / 2} ${top + r} L${x + tw / 2} ${H} Z `;
+      const cy = top + r * 1.3;
+      crowns += circle(x, cy, r);
+      crowns += circle(x - r * 0.75, cy + r * 0.45, r * 0.75);
+      crowns += circle(x + r * 0.75, cy + r * 0.4, r * 0.8);
+      crowns += circle(x, cy - r * 0.55, r * 0.7);
+      continue;
+    }
+
     // Sapin en étages : chaque étage déborde un peu du précédent.
-    d += `L${x - w / 2} ${H} `;
+    const w = h * rand(0.4, 0.55);
+    const tiers = 4;
+    pines += `L${x - w / 2} ${H} `;
     for (let t = tiers; t >= 1; t--) {
       const y = top + (h * (tiers - t + 1)) / (tiers + 0.6);
       const half = (w / 2) * (1 - (t - 1) / (tiers + 1));
-      d += `L${x - half} ${y} L${x - half * 0.55} ${y - h * 0.04} `;
+      pines += `L${x - half} ${y} L${x - half * 0.55} ${y - h * 0.04} `;
     }
-    d += `L${x} ${top} `;
+    pines += `L${x} ${top} `;
     for (let t = 1; t <= tiers; t++) {
       const y = top + (h * (tiers - t + 1)) / (tiers + 0.6);
       const half = (w / 2) * (1 - (t - 1) / (tiers + 1));
-      d += `L${x + half * 0.55} ${y - h * 0.04} L${x + half} ${y} `;
+      pines += `L${x + half * 0.55} ${y - h * 0.04} L${x + half} ${y} `;
     }
-    d += `L${x + w / 2} ${H} `;
+    pines += `L${x + w / 2} ${H} `;
   }
-  d += `L${W} ${H} Z`;
+  pines += `L${W} ${H} Z`;
 
-  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-  path.setAttribute("d", d);
-  svg.appendChild(path);
+  // Chemins séparés pour éviter que les formes superposées ne s'annulent.
+  svgPath(svg, pines);
+  if (trunks) svgPath(svg, trunks);
+  if (crowns) svgPath(svg, crowns);
 }
 
 const forests = [
@@ -128,14 +154,14 @@ addEventListener("resize", () => {
   drawForests();
 });
 
-/* ---------- Feuilles d'automne qui tombent ---------- */
+/* ---------- Feuilles d'érable et de chêne qui tombent ---------- */
 
 if (!reduceMotion) {
   const leaves = document.querySelector(".leaves");
-  const colors = ["#c8893a", "#b5582f", "#d9a441", "#8f3f2a", "#7a8f3a"];
-  for (let i = 0; i < 14; i++) {
+  const colors = ["#d9622b", "#c8893a", "#b5402a", "#e8a33d", "#8f3f2a", "#f0c470", "#a0522d"];
+  for (let i = 0; i < 24; i++) {
     const leaf = document.createElement("span");
-    leaf.className = "leaf";
+    leaf.className = `leaf ${i % 3 ? "maple" : "oak"}`;
     leaf.style.left = `${rand(0, 100)}%`;
     leaf.style.setProperty("--c", colors[i % colors.length]);
     leaf.style.setProperty("--d", `${rand(12, 22)}s`);
@@ -184,9 +210,9 @@ function drawFlies(animate) {
     }
     const a = 0.35 + 0.65 * Math.abs(Math.sin(f.phase));
     const g = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 7);
-    g.addColorStop(0, `rgba(255, 244, 170, ${a})`);
-    g.addColorStop(0.25, `rgba(230, 220, 110, ${a * 0.45})`);
-    g.addColorStop(1, "rgba(200, 220, 90, 0)");
+    g.addColorStop(0, `rgba(255, 236, 180, ${a})`);
+    g.addColorStop(0.25, `rgba(255, 180, 90, ${a * 0.45})`);
+    g.addColorStop(1, "rgba(240, 130, 50, 0)");
     ctx.fillStyle = g;
     ctx.beginPath();
     ctx.arc(f.x, f.y, f.r * 7, 0, Math.PI * 2);
