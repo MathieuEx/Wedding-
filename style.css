@@ -48,6 +48,14 @@ body {
   color: var(--accent);
 }
 
+.subtitle {
+  margin: 14px 0 0;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+
 .title {
   margin: 8px 0 0;
   font-family: "Great Vibes", cursive;

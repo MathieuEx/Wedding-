@@ -43,7 +43,7 @@ const ics = [
   "DTSTAMP:20260101T000000Z",
   "DTSTART;VALUE=DATE:20271023",
   "DTEND;VALUE=DATE:20271024",
-  "SUMMARY:Notre mariage 💍",
+  "SUMMARY:Mariage de Mathieu & Sophie 💍",
   "LOCATION:Domaine de Fourniol\\, 82240 Septfonds",
   "END:VEVENT",
   "END:VCALENDAR",
