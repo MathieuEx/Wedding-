@@ -156,6 +156,7 @@ body {
 
 .card {
   position: relative;
+  margin-top: 22.5%; /* place pour les ailes */
   container-type: inline-size;
   animation: card-in 1.6s cubic-bezier(.2, .8, .2, 1) both;
 }
@@ -165,6 +166,16 @@ body {
   width: 100%;
   height: auto;
   filter: drop-shadow(0 18px 30px rgba(0, 0, 0, .45)) drop-shadow(0 0 40px rgba(255, 220, 150, .12));
+}
+
+/* Haut des ailes, au-dessus de l'image (852 × 1267) */
+.dragon-wings {
+  position: absolute;
+  left: 29.343%;
+  top: -14.996%;
+  width: 70.657%;
+  height: auto;
+  pointer-events: none;
 }
 
 /* Suite de la lame, calée sur les coordonnées de l'image (852 × 1267) */
