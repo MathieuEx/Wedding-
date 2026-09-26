@@ -24,6 +24,8 @@
     <div class="card">
       <img class="card-art" src="images/faire-part.webp" width="852" height="1267"
            alt="Faire-part : parchemin orné de gravures florales, un dragon vert agrippé en haut à droite et une épée en bas à gauche. Sophie et Mathieu — Nous nous marions.">
+      <!-- Suite de la lame, reconstituée à partir de sa texture -->
+      <img class="sword-blade" src="images/epee-lame.webp" width="560" height="620" alt="">
       <h1 class="sr-only">Sophie et Mathieu — Nous nous marions</h1>
 
       <!-- Reflets scintillants sur les pierres de l'épée -->
@@ -60,10 +62,66 @@
     </div>
 
     <div class="actions reveal">
-      <a class="btn" id="add-calendar" href="#" download="mariage-sophie-mathieu.ics">Ajouter au calendrier</a>
+      <a class="btn" href="#rsvp">Répondre à l'invitation</a>
+      <span class="break" aria-hidden="true"></span>
+      <a class="btn btn-ghost" id="add-calendar" href="#" download="mariage-sophie-mathieu.ics">Ajouter au calendrier</a>
       <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Domaine+de+Fourniol+Septfonds" target="_blank" rel="noopener">Voir sur la carte</a>
     </div>
+
   </main>
+
+  <section class="rsvp" id="rsvp" aria-labelledby="rsvp-title">
+    <h2 id="rsvp-title">Répondez s'il vous plaît</h2>
+    <p class="rsvp-intro">Dites-nous si vous serez des nôtres au Domaine de Fourniol.</p>
+
+    <form id="rsvp-form" novalidate>
+      <div class="field">
+        <label for="rsvp-name">Nom et prénom</label>
+        <input id="rsvp-name" name="nom" autocomplete="name" required>
+      </div>
+
+      <div class="field">
+        <label for="rsvp-email">E-mail</label>
+        <input id="rsvp-email" name="email" type="email" autocomplete="email" required>
+      </div>
+
+      <fieldset class="field choice">
+        <legend>Serez-vous présent·e ?</legend>
+        <label><input type="radio" name="presence" value="oui" required> <span>Oui, avec joie !</span></label>
+        <label><input type="radio" name="presence" value="non"> <span>Non, hélas</span></label>
+      </fieldset>
+
+      <div class="if-yes" hidden>
+        <div class="field">
+          <label for="rsvp-guests">Nombre de personnes (vous compris)</label>
+          <select id="rsvp-guests" name="personnes">
+            <option>1</option><option selected>2</option><option>3</option>
+            <option>4</option><option>5</option><option>6</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="rsvp-diet">Régime alimentaire ou allergies</label>
+          <input id="rsvp-diet" name="regime" placeholder="Végétarien, sans gluten…">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="rsvp-message">Un petit mot pour les mariés</label>
+        <textarea id="rsvp-message" name="message" rows="3"></textarea>
+      </div>
+
+      <!-- Piège anti-spam : laissé vide par les humains -->
+      <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <p class="form-error" id="rsvp-error" role="alert" hidden></p>
+      <button class="btn" type="submit">Envoyer ma réponse</button>
+    </form>
+
+    <div class="rsvp-thanks" id="rsvp-thanks" role="status" hidden>
+      <p class="thanks-title">Merci !</p>
+      <p id="rsvp-thanks-text"></p>
+    </div>
+  </section>
 
   <!-- Décor devant le faire-part : brume, lucioles, feuilles -->
   <div class="scene scene-front" aria-hidden="true">
