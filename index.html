@@ -3,89 +3,63 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mathieu &amp; Sophie — Save the Date</title>
-  <meta name="description" content="Save the Date : le mariage de Mathieu &amp; Sophie le 23 octobre 2027 au Domaine de Fourniol à Septfonds.">
-  <meta name="theme-color" content="#1a0f0a">
-  <link rel="preload" href="fonts/unifrakturmaguntia-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <title>Sophie &amp; Mathieu — Save the Date</title>
+  <meta name="description" content="Save the Date : le mariage de Sophie &amp; Mathieu le 23 octobre 2027 au Domaine de Fourniol à Septfonds.">
+  <meta name="theme-color" content="#1e3111">
+  <link rel="preload" href="images/faire-part.webp" as="image">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Décor : ciel, lune, brume, forêt, lucioles, feuilles -->
+  <!-- Décor animé : lucioles et feuilles d'automne sur fond vert forêt -->
   <div class="scene" aria-hidden="true">
-    <div class="stars"></div>
-    <div class="moon"></div>
-    <div class="rays"></div>
-    <svg class="forest forest-far" preserveAspectRatio="none"></svg>
-    <div class="mist mist-back"></div>
-    <svg class="forest forest-mid" preserveAspectRatio="none"></svg>
-    <div class="mist mist-front"></div>
-    <svg class="forest forest-near" preserveAspectRatio="none"></svg>
-    <svg class="mushrooms mushrooms-left" viewBox="0 0 120 60">
-      <g class="shroom"><rect x="22" y="30" width="8" height="30" rx="3"/><path d="M6 34 q20 -34 40 0z"/></g>
-      <g class="shroom" style="--delay:1.2s"><rect x="54" y="40" width="6" height="20" rx="3"/><path d="M42 43 q15 -24 30 0z"/></g>
-      <g class="shroom" style="--delay:2.1s"><rect x="84" y="46" width="4" height="14" rx="2"/><path d="M76 48 q10 -16 20 0z"/></g>
-    </svg>
-    <svg class="mushrooms mushrooms-right" viewBox="0 0 120 60">
-      <g class="shroom" style="--delay:.6s"><rect x="80" y="32" width="7" height="28" rx="3"/><path d="M66 36 q17 -30 35 0z"/></g>
-      <g class="shroom" style="--delay:1.8s"><rect x="46" y="44" width="5" height="16" rx="2"/><path d="M36 47 q12 -20 25 0z"/></g>
-    </svg>
     <canvas id="fireflies"></canvas>
     <div class="leaves"></div>
   </div>
 
-  <main class="card">
-    <svg class="vine vine-top" viewBox="0 0 400 40" aria-hidden="true">
-      <path d="M10 30 C 80 0, 140 40, 200 18 S 320 0, 390 30" />
-      <g class="vine-leaves">
-        <path d="M70 16 q10 -14 22 -6 q-10 12 -22 6z" />
-        <path d="M130 26 q12 8 22 -2 q-12 -10 -22 2z" />
-        <path d="M200 18 q-4 -16 8 -20 q6 14 -8 20z" />
-        <path d="M270 12 q10 -12 22 -4 q-10 12 -22 4z" />
-        <path d="M330 18 q12 10 22 0 q-12 -10 -22 0z" />
-      </g>
-    </svg>
+  <main class="invite">
+    <!-- Le faire-part (parchemin, dragon, épée) ; les prénoms font partie de l'image -->
+    <div class="card">
+      <img class="card-art" src="images/faire-part.webp" width="852" height="1267"
+           alt="Faire-part : parchemin orné de gravures florales, un dragon vert agrippé en haut à droite et une épée en bas à gauche. Sophie et Mathieu — Nous nous marions.">
+      <h1 class="sr-only">Sophie et Mathieu — Nous nous marions</h1>
 
-    <p class="eyebrow reveal">Save the Date</p>
-    <p class="subtitle reveal">Nous nous marions !</p>
-    <h1 class="title reveal"><span>Mathieu</span> <span class="amp">&amp;</span> <span>Sophie</span></h1>
+      <!-- Reflets scintillants sur les pierres de l'épée -->
+      <span class="sparkle" style="--x:28%; --y:78.6%" aria-hidden="true"></span>
+      <span class="sparkle" style="--x:14.7%; --y:88%; --delay:1.7s" aria-hidden="true"></span>
 
-    <div class="divider reveal" aria-hidden="true">
-      <svg viewBox="0 0 40 24"><path d="M20 2 C 12 8, 12 16, 20 22 C 28 16, 28 8, 20 2z M20 6 V 20" /></svg>
+      <div class="content">
+        <p class="eyebrow reveal">Save the Date</p>
+
+        <div class="ornament reveal" aria-hidden="true">
+          <svg viewBox="0 0 120 12"><path d="M2 6 H48 M72 6 H118 M60 1 L65 6 L60 11 L55 6 Z" /></svg>
+        </div>
+
+        <p class="date reveal">
+          <span class="weekday">Samedi</span>
+          <time datetime="2027-10-23">23 octobre 2027</time>
+        </p>
+
+        <p class="place reveal">
+          Domaine de Fourniol
+          <span>Septfonds · Tarn-et-Garonne</span>
+        </p>
+
+        <section class="countdown reveal" aria-label="Compte à rebours">
+          <div class="unit"><span id="days">--</span><small>jours</small></div>
+          <div class="unit"><span id="hours">--</span><small>heures</small></div>
+          <div class="unit"><span id="minutes">--</span><small>minutes</small></div>
+          <div class="unit"><span id="seconds">--</span><small>secondes</small></div>
+        </section>
+        <p id="done" class="done" hidden>C'est le grand jour !</p>
+
+        <p class="note reveal">Faire-part à suivre…</p>
+      </div>
     </div>
-
-    <p class="date reveal">
-      <time datetime="2027-10-23">Samedi 23 octobre 2027</time>
-    </p>
-    <p class="place reveal">
-      Domaine de Fourniol<br>
-      <span>Septfonds · Tarn-et-Garonne</span>
-    </p>
-
-    <section class="countdown reveal" aria-label="Compte à rebours">
-      <div class="unit"><span id="days">--</span><small>Jours</small></div>
-      <div class="unit"><span id="hours">--</span><small>Heures</small></div>
-      <div class="unit"><span id="minutes">--</span><small>Minutes</small></div>
-      <div class="unit"><span id="seconds">--</span><small>Secondes</small></div>
-    </section>
-    <p id="done" class="done" hidden>C'est le grand jour ! 💍</p>
 
     <div class="actions reveal">
-      <a class="btn" id="add-calendar" href="#" download="mariage-mathieu-sophie.ics">Ajouter au calendrier</a>
+      <a class="btn" id="add-calendar" href="#" download="mariage-sophie-mathieu.ics">Ajouter au calendrier</a>
       <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Domaine+de+Fourniol+Septfonds" target="_blank" rel="noopener">Voir sur la carte</a>
     </div>
-
-    <p class="note reveal">Faire-part à suivre…</p>
-
-    <svg class="vine vine-bottom" viewBox="0 0 400 40" aria-hidden="true">
-      <path d="M10 30 C 80 0, 140 40, 200 18 S 320 0, 390 30" />
-      <g class="vine-leaves">
-        <path d="M70 16 q10 -14 22 -6 q-10 12 -22 6z" />
-        <path d="M130 26 q12 8 22 -2 q-12 -10 -22 2z" />
-        <path d="M200 18 q-4 -16 8 -20 q6 14 -8 20z" />
-        <path d="M270 12 q10 -12 22 -4 q-10 12 -22 4z" />
-        <path d="M330 18 q12 10 22 0 q-12 -10 -22 0z" />
-      </g>
-    </svg>
   </main>
 
   <script src="script.js"></script>
