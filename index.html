@@ -5,28 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mathieu &amp; Sophie — Save the Date</title>
   <meta name="description" content="Save the Date : le mariage de Mathieu &amp; Sophie le 23 octobre 2027 au Domaine de Fourniol à Septfonds.">
+  <meta name="theme-color" content="#06140f">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Décor : ciel, lune, brume, forêt, lucioles, feuilles -->
+  <div class="scene" aria-hidden="true">
+    <div class="stars"></div>
+    <div class="moon"></div>
+    <div class="rays"></div>
+    <svg class="forest forest-far" preserveAspectRatio="none"></svg>
+    <div class="mist mist-back"></div>
+    <svg class="forest forest-mid" preserveAspectRatio="none"></svg>
+    <div class="mist mist-front"></div>
+    <svg class="forest forest-near" preserveAspectRatio="none"></svg>
+    <canvas id="fireflies"></canvas>
+    <div class="leaves"></div>
+  </div>
+
   <main class="card">
-    <p class="eyebrow">Save the Date</p>
-    <p class="subtitle">Nous nous marions !</p>
-    <h1 class="title">Mathieu &amp; Sophie</h1>
+    <svg class="vine vine-top" viewBox="0 0 400 40" aria-hidden="true">
+      <path d="M10 30 C 80 0, 140 40, 200 18 S 320 0, 390 30" />
+      <g class="vine-leaves">
+        <path d="M70 16 q10 -14 22 -6 q-10 12 -22 6z" />
+        <path d="M130 26 q12 8 22 -2 q-12 -10 -22 2z" />
+        <path d="M200 18 q-4 -16 8 -20 q6 14 -8 20z" />
+        <path d="M270 12 q10 -12 22 -4 q-10 12 -22 4z" />
+        <path d="M330 18 q12 10 22 0 q-12 -10 -22 0z" />
+      </g>
+    </svg>
 
-    <div class="divider" aria-hidden="true"><span>❦</span></div>
+    <p class="eyebrow reveal">Save the Date</p>
+    <p class="subtitle reveal">Nous nous marions !</p>
+    <h1 class="title reveal">Mathieu <span class="amp">&amp;</span> Sophie</h1>
 
-    <p class="date">
+    <div class="divider reveal" aria-hidden="true">
+      <svg viewBox="0 0 40 24"><path d="M20 2 C 12 8, 12 16, 20 22 C 28 16, 28 8, 20 2z M20 6 V 20" /></svg>
+    </div>
+
+    <p class="date reveal">
       <time datetime="2027-10-23">Samedi 23 octobre 2027</time>
     </p>
-    <p class="place">
+    <p class="place reveal">
       Domaine de Fourniol<br>
       <span>Septfonds · Tarn-et-Garonne</span>
     </p>
 
-    <section class="countdown" aria-live="polite" aria-label="Compte à rebours">
+    <section class="countdown reveal" aria-label="Compte à rebours">
       <div class="unit"><span id="days">--</span><small>Jours</small></div>
       <div class="unit"><span id="hours">--</span><small>Heures</small></div>
       <div class="unit"><span id="minutes">--</span><small>Minutes</small></div>
@@ -34,12 +62,23 @@
     </section>
     <p id="done" class="done" hidden>C'est le grand jour ! 💍</p>
 
-    <div class="actions">
+    <div class="actions reveal">
       <a class="btn" id="add-calendar" href="#" download="mariage-mathieu-sophie.ics">Ajouter au calendrier</a>
       <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Domaine+de+Fourniol+Septfonds" target="_blank" rel="noopener">Voir sur la carte</a>
     </div>
 
-    <p class="note">Faire-part à suivre…</p>
+    <p class="note reveal">Faire-part à suivre…</p>
+
+    <svg class="vine vine-bottom" viewBox="0 0 400 40" aria-hidden="true">
+      <path d="M10 30 C 80 0, 140 40, 200 18 S 320 0, 390 30" />
+      <g class="vine-leaves">
+        <path d="M70 16 q10 -14 22 -6 q-10 12 -22 6z" />
+        <path d="M130 26 q12 8 22 -2 q-12 -10 -22 2z" />
+        <path d="M200 18 q-4 -16 8 -20 q6 14 -8 20z" />
+        <path d="M270 12 q10 -12 22 -4 q-10 12 -22 4z" />
+        <path d="M330 18 q12 10 22 0 q-12 -10 -22 0z" />
+      </g>
+    </svg>
   </main>
 
   <script src="script.js"></script>
