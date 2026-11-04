@@ -569,11 +569,30 @@ body {
 .legal p a:not(.btn) { color: var(--gold); }
 .legal-back { margin-top: 32px !important; text-align: center; }
 
+/* Évite les coupures au milieu d'un nom (ex. « Tarn-et- / Garonne ») */
+.nowrap { white-space: nowrap; }
+
 @media (max-width: 420px) {
   .card { padding: 50px 18px 40px; }
   .countdown { gap: 8px; }
   .unit small { font-size: .5rem; letter-spacing: .06em; }
   .btn { font-size: .72rem; }
+  .place span { letter-spacing: .1em; }
+}
+
+/* Téléphones en paysage : écran peu haut, on resserre les espacements */
+@media (max-height: 500px) and (orientation: landscape) {
+  body { padding: 24px 16px; }
+  .card { padding: 40px 28px 34px; }
+  .subtitle { margin-top: 6px; }
+  .title { font-size: clamp(2.4rem, 7vw, 3.4rem); }
+  .divider { margin: 10px auto; }
+  .place { margin-top: 6px; }
+  .countdown { margin: 22px 0 4px; }
+  .unit { padding: 12px 4px 10px; }
+  .actions { margin-top: 20px; }
+  .note { margin-top: 18px; }
+  .grove { width: clamp(150px, 20vw, 220px); }
 }
 
 /* ---------- Animations ---------- */
