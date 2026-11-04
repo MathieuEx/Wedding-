@@ -10,7 +10,68 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Décor : ciel, lune, brume, forêt, lucioles, feuilles -->
+  <!-- Motifs réutilisables : amanite tue-mouches, nain de jardin, lanterne -->
+  <svg class="defs" width="0" height="0" aria-hidden="true">
+    <defs>
+      <radialGradient id="cap-red" cx="38%" cy="28%" r="78%">
+        <stop offset="0" stop-color="#ff5a3c"/>
+        <stop offset=".5" stop-color="#d0231a"/>
+        <stop offset="1" stop-color="#7c0f08"/>
+      </radialGradient>
+      <radialGradient id="lantern-light">
+        <stop offset="0" stop-color="#ffd27a" stop-opacity=".8"/>
+        <stop offset="1" stop-color="#ff9a40" stop-opacity="0"/>
+      </radialGradient>
+
+      <symbol id="amanita" viewBox="0 0 60 70">
+        <path d="M21 70 Q18 63 25 60 L26.5 34 H33.5 L35 60 Q42 63 39 70Z" fill="#f4ebda"/>
+        <path d="M23.5 45 Q30 49 36.5 45 L37.5 49 Q30 53 22.5 49Z" fill="#e2d3b8"/>
+        <ellipse cx="30" cy="36" rx="21" ry="3.5" fill="#e6d4b4"/>
+        <path d="M6 36 Q7 7 30 6 Q53 7 54 36 Q30 41 6 36Z" fill="url(#cap-red)"/>
+        <g fill="#fffaf0">
+          <circle cx="18" cy="22" r="3.2"/><circle cx="30" cy="13" r="2.6"/>
+          <circle cx="41" cy="23" r="3.4"/><circle cx="25" cy="31" r="2.2"/>
+          <circle cx="47" cy="32" r="2"/><circle cx="12" cy="31" r="1.8"/>
+          <circle cx="35" cy="32" r="1.6"/><circle cx="21" cy="14" r="1.8"/>
+          <circle cx="40" cy="12" r="1.6"/>
+        </g>
+      </symbol>
+
+      <symbol id="gnome" viewBox="0 0 80 130">
+        <ellipse cx="40" cy="126" rx="26" ry="3.5" fill="#000" opacity=".35"/>
+        <ellipse cx="30" cy="123" rx="10" ry="5" fill="#4a2a17"/>
+        <ellipse cx="50" cy="123" rx="10" ry="5" fill="#4a2a17"/>
+        <path class="g-tunic" d="M18 121 Q16 80 40 68 Q64 80 62 121Z"/>
+        <path class="g-tunic" d="M25 78 Q12 88 14 102 L22 102 Q22 90 31 83Z"/>
+        <path class="g-tunic" d="M55 78 Q68 88 66 102 L58 102 Q58 90 49 83Z"/>
+        <rect x="17.5" y="100" width="45" height="6" fill="#3b2213"/>
+        <rect x="36" y="99" width="8" height="8" rx="1" fill="none" stroke="#f0c470" stroke-width="1.6"/>
+        <circle cx="18" cy="104" r="4.5" fill="#f1c3a0"/>
+        <circle cx="62" cy="104" r="4.5" fill="#f1c3a0"/>
+        <ellipse cx="40" cy="60" rx="12" ry="9" fill="#f1c3a0"/>
+        <circle cx="31" cy="59" r="2.6" fill="#e5806c" opacity=".6"/>
+        <circle cx="49" cy="59" r="2.6" fill="#e5806c" opacity=".6"/>
+        <path d="M28 60 Q34 66 40 64 Q46 66 52 60 Q58 84 40 98 Q22 84 28 60Z" fill="#f3efe6"/>
+        <g class="g-eyes" fill="#2a160c">
+          <ellipse cx="35" cy="57" rx="1.5" ry="1.9"/><ellipse cx="45" cy="57" rx="1.5" ry="1.9"/>
+        </g>
+        <path d="M40 64 Q33 60 28 66 Q34 68 40 65.5 Q46 68 52 66 Q47 60 40 64Z" fill="#fff"/>
+        <circle cx="40" cy="61.5" r="4.5" fill="#e79a7f"/>
+        <path class="g-hat" d="M25 54 Q30 28 42 6 Q46 2 48 9 Q50 30 56 54 Q40 50 25 54Z"/>
+        <path d="M28 46 Q34 24 43 9" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+
+      <symbol id="lantern" viewBox="0 0 20 30">
+        <path d="M5 7 Q10 -1 15 7" fill="none" stroke="#2b1a10" stroke-width="1.6"/>
+        <rect x="5" y="9" width="10" height="13" rx="1" fill="#ffd27a" opacity=".85"/>
+        <ellipse class="flame" cx="10" cy="16" rx="2.4" ry="4" fill="#fff4c9"/>
+        <path d="M3.5 9 L6 5.5 H14 L16.5 9Z M3.5 22 H16.5 V25 H3.5Z" fill="#2b1a10"/>
+        <path d="M5 9 V22 M15 9 V22" stroke="#2b1a10" stroke-width="1"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- Décor : ciel, lune, brume, forêt, nains, amanites, lucioles, feuilles -->
   <div class="scene" aria-hidden="true">
     <div class="stars"></div>
     <div class="moon"></div>
@@ -20,14 +81,29 @@
     <svg class="forest forest-mid" preserveAspectRatio="none"></svg>
     <div class="mist mist-front"></div>
     <svg class="forest forest-near" preserveAspectRatio="none"></svg>
-    <svg class="mushrooms mushrooms-left" viewBox="0 0 120 60">
-      <g class="shroom"><rect x="22" y="30" width="8" height="30" rx="3"/><path d="M6 34 q20 -34 40 0z"/></g>
-      <g class="shroom" style="--delay:1.2s"><rect x="54" y="40" width="6" height="20" rx="3"/><path d="M42 43 q15 -24 30 0z"/></g>
-      <g class="shroom" style="--delay:2.1s"><rect x="84" y="46" width="4" height="14" rx="2"/><path d="M76 48 q10 -16 20 0z"/></g>
+    <!-- Nain à la lanterne et amanites, à gauche -->
+    <svg class="grove grove-left" viewBox="0 0 240 150">
+      <use class="shroom" href="#amanita" x="-4" y="66" width="72" height="84"/>
+      <g class="gnome">
+        <circle class="lantern-glow" cx="132" cy="136" r="36" fill="url(#lantern-light)"/>
+        <use href="#gnome" x="70" y="20" width="80" height="130" style="--blink:.4s"/>
+        <use href="#lantern" x="124" y="123" width="16" height="24"/>
+      </g>
+      <use class="shroom" href="#amanita" x="50" y="122" width="24" height="28" style="--delay:1.4s"/>
+      <use class="shroom" href="#amanita" x="152" y="92" width="50" height="58" style="--delay:.7s"/>
+      <use class="shroom" href="#amanita" x="203" y="115" width="30" height="35" style="--delay:2s"/>
     </svg>
-    <svg class="mushrooms mushrooms-right" viewBox="0 0 120 60">
-      <g class="shroom" style="--delay:.6s"><rect x="80" y="32" width="7" height="28" rx="3"/><path d="M66 36 q17 -30 35 0z"/></g>
-      <g class="shroom" style="--delay:1.8s"><rect x="46" y="44" width="5" height="16" rx="2"/><path d="M36 47 q12 -20 25 0z"/></g>
+    <!-- Nain cueilleur et grande amanite, à droite -->
+    <svg class="grove grove-right" viewBox="0 0 240 150">
+      <use class="shroom" href="#amanita" x="8" y="108" width="36" height="42" style="--delay:.6s"/>
+      <use class="shroom" href="#amanita" x="46" y="124" width="22" height="26" style="--delay:1.1s"/>
+      <g class="gnome" style="--sway-delay:-2.5s">
+        <g transform="translate(170 20) scale(-1 1)">
+          <use href="#gnome" width="80" height="130" style="--tunic:#3d6b3a;--hat:#b8231a;--blink:2.3s"/>
+        </g>
+        <use href="#amanita" x="98" y="104" width="20" height="24"/>
+      </g>
+      <use class="shroom" href="#amanita" x="160" y="58" width="78" height="92" style="--delay:1.8s"/>
     </svg>
     <canvas id="fireflies"></canvas>
     <div class="leaves"></div>
@@ -50,7 +126,7 @@
     <h1 class="title reveal"><span>Mathieu</span> <span class="amp">&amp;</span> <span>Sophie</span></h1>
 
     <div class="divider reveal" aria-hidden="true">
-      <svg viewBox="0 0 40 24"><path d="M20 2 C 12 8, 12 16, 20 22 C 28 16, 28 8, 20 2z M20 6 V 20" /></svg>
+      <svg viewBox="0 0 60 70"><use href="#amanita"/></svg>
     </div>
 
     <p class="date reveal">
@@ -75,6 +151,12 @@
     </div>
 
     <p class="note reveal">Faire-part à suivre…</p>
+
+    <svg class="card-shrooms reveal" viewBox="0 0 70 40" aria-hidden="true">
+      <use href="#amanita" x="0" y="6" width="30" height="34"/>
+      <use href="#amanita" x="26" y="18" width="19" height="22"/>
+      <use href="#amanita" x="44" y="26" width="12" height="14"/>
+    </svg>
 
     <svg class="vine vine-bottom" viewBox="0 0 400 40" aria-hidden="true">
       <path d="M10 30 C 80 0, 140 40, 200 18 S 320 0, 390 30" />

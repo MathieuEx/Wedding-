@@ -132,20 +132,42 @@ body {
 .mist-back  { bottom: 30%; animation: drift 40s linear infinite alternate; }
 .mist-front { bottom: 6%;  animation: drift 28s linear infinite alternate-reverse; opacity: .85; }
 
-/* Champignons lumineux */
-.mushrooms {
+.defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* Nains de jardin et amanites tue-mouches */
+.grove {
   position: absolute;
   bottom: 0;
-  width: clamp(110px, 14vw, 180px);
+  width: clamp(170px, 27vw, 380px);
+  overflow: visible;
 }
-.mushrooms-left  { left: 2%; }
-.mushrooms-right { right: 2%; }
-.shroom rect { fill: #f3dcc0; opacity: .85; }
-.shroom path {
-  fill: #ff9a4d;
-  filter: drop-shadow(0 0 6px #ffb070);
+.grove-left  { left: 1%; }
+.grove-right { right: 1%; }
+
+.shroom {
+  filter: drop-shadow(0 0 3px rgba(255, 90, 60, .25));
   animation: shroom-glow 3.5s ease-in-out var(--delay, 0s) infinite alternate;
 }
+
+.g-tunic { fill: var(--tunic, #2f5d8a); }
+.g-hat   { fill: var(--hat, #c62a1d); }
+
+.gnome {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: gnome-sway 5s ease-in-out var(--sway-delay, 0s) infinite alternate;
+}
+.g-eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: blink 5s var(--blink, 0s) infinite;
+}
+.flame {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: flicker .3s ease-in-out infinite alternate;
+}
+.lantern-glow { animation: lantern 2.4s ease-in-out infinite alternate; }
 
 #fireflies {
   position: absolute;
@@ -289,13 +311,20 @@ body {
 }
 .divider::after { transform: scaleX(-1); }
 .divider svg {
-  width: 30px;
-  height: 20px;
-  fill: rgba(217, 98, 43, .5);
-  stroke: var(--gold);
-  stroke-width: 1.4;
+  width: 28px;
+  height: 33px;
   filter: drop-shadow(0 0 6px var(--glow));
 }
+
+/* Petites amanites qui poussent sur le coin de la carte */
+.card-shrooms {
+  position: absolute;
+  right: 26px;
+  bottom: -3px;
+  width: 70px;
+  filter: drop-shadow(0 0 5px rgba(255, 110, 70, .35));
+}
+.card-shrooms.reveal { animation-delay: 2.8s; }
 
 .date {
   margin: 0;
@@ -456,9 +485,19 @@ body {
   to   { box-shadow: 0 0 55px 16px rgba(255, 190, 110, .42), 0 0 170px 60px rgba(255, 150, 70, .22); }
 }
 @keyframes shroom-glow {
-  from { opacity: .55; }
-  to   { opacity: 1; filter: drop-shadow(0 0 12px #ffb070); }
+  from { filter: drop-shadow(0 0 2px rgba(255, 90, 60, .2)); }
+  to   { filter: drop-shadow(0 0 10px rgba(255, 120, 80, .55)); }
 }
+@keyframes gnome-sway { from { transform: rotate(-1.5deg); } to { transform: rotate(1.5deg); } }
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95%           { transform: scaleY(.1); }
+}
+@keyframes flicker {
+  from { transform: scale(1, 1); opacity: .9; }
+  to   { transform: scale(.88, 1.12); opacity: 1; }
+}
+@keyframes lantern { from { opacity: .6; } to { opacity: 1; } }
 @keyframes rays  { from { opacity: .5; transform: rotate(-1.5deg); } to { opacity: 1; transform: rotate(1.5deg); } }
 @keyframes sway  { from { transform: skewX(-.8deg); } to { transform: skewX(.8deg); } }
 @keyframes drift { from { transform: translateX(0); } to { transform: translateX(25%); } }
