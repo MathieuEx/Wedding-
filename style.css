@@ -274,7 +274,7 @@ body {
     0 0 0 6px rgba(28, 11, 19, .4),
     0 30px 80px rgba(0, 0, 0, .6),
     inset 0 0 60px rgba(245, 232, 207, .07);
-  animation: card-in 1.4s cubic-bezier(.2, .8, .2, 1) both;
+  animation: card-in 1s cubic-bezier(.2, .8, .2, 1) both;
 }
 
 .vine {
@@ -293,32 +293,32 @@ body {
   stroke-linecap: round;
   stroke-dasharray: 500;
   stroke-dashoffset: 500;
-  animation: draw 2.4s ease-out .6s forwards;
+  animation: draw 1.6s ease-out .4s forwards;
 }
 .vine-leaves path {
   opacity: 0;
   transform-box: fill-box;
   transform-origin: center;
-  animation: bloom .8s ease-out forwards;
+  animation: bloom .6s ease-out forwards;
 }
-.vine-leaves path:nth-child(1) { animation-delay: 1.2s; fill: var(--terracotta); }
-.vine-leaves path:nth-child(2) { animation-delay: 1.5s; fill: var(--ochre); }
-.vine-leaves path:nth-child(3) { animation-delay: 1.8s; fill: var(--gold); }
-.vine-leaves path:nth-child(4) { animation-delay: 2.1s; fill: #8e2a45; }
-.vine-leaves path:nth-child(5) { animation-delay: 2.4s; fill: var(--burnt); }
+.vine-leaves path:nth-child(1) { animation-delay: .8s; fill: var(--terracotta); }
+.vine-leaves path:nth-child(2) { animation-delay: 1s; fill: var(--ochre); }
+.vine-leaves path:nth-child(3) { animation-delay: 1.2s; fill: var(--gold); }
+.vine-leaves path:nth-child(4) { animation-delay: 1.4s; fill: #8e2a45; }
+.vine-leaves path:nth-child(5) { animation-delay: 1.6s; fill: var(--burnt); }
 
 .reveal {
   opacity: 0;
-  animation: rise 1s ease-out forwards;
+  animation: rise .7s ease-out forwards;
 }
-.eyebrow.reveal   { animation-delay: .5s; }
-.subtitle.reveal  { animation-delay: .75s; }
-.divider.reveal   { animation-delay: 1.5s; }
-.date.reveal      { animation-delay: 1.7s; }
-.place.reveal     { animation-delay: 1.9s; }
-.countdown.reveal { animation-delay: 2.1s; }
-.actions.reveal   { animation-delay: 2.35s; }
-.note.reveal      { animation-delay: 2.55s; }
+.eyebrow.reveal   { animation-delay: .3s; }
+.subtitle.reveal  { animation-delay: .45s; }
+.divider.reveal   { animation-delay: .95s; }
+.date.reveal      { animation-delay: 1.1s; }
+.place.reveal     { animation-delay: 1.25s; }
+.countdown.reveal { animation-delay: 1.4s; }
+.actions.reveal   { animation-delay: 1.55s; }
+.note.reveal      { animation-delay: 1.7s; }
 
 .eyebrow {
   margin: 0;
@@ -350,7 +350,7 @@ body {
   filter: drop-shadow(0 2px 0 rgba(60, 14, 30, .65)) drop-shadow(0 0 16px rgba(230, 184, 92, .35));
 }
 .title.reveal {
-  animation: ink-in 1.6s ease-out 1s forwards, shimmer 7s linear 2.6s infinite;
+  animation: ink-in 1s ease-out .6s forwards, shimmer 7s linear 1.6s infinite;
 }
 .title span { display: inline-block; }
 .title .amp { font-size: .8em; padding: 0 .1em; }
@@ -384,7 +384,7 @@ body {
   width: 70px;
   filter: drop-shadow(0 0 5px rgba(255, 110, 70, .35));
 }
-.card-shrooms.reveal { animation-delay: 2.8s; }
+.card-shrooms.reveal { animation-delay: 1.85s; }
 
 .date {
   margin: 0;
@@ -518,9 +518,11 @@ body {
   to   { opacity: 1; transform: none; }
 }
 /* Les prénoms apparaissent comme de l'encre qui se dépose */
+/* Uniquement opacité et transform : animer letter-spacing faisait passer
+   les prénoms sur deux lignes et la carte sautait au chargement. */
 @keyframes ink-in {
-  0%   { opacity: 0; letter-spacing: .12em; transform: scale(.96); }
-  100% { opacity: 1; letter-spacing: 0; transform: none; }
+  0%   { opacity: 0; transform: scaleX(1.1) scaleY(.96); }
+  100% { opacity: 1; transform: none; }
 }
 @keyframes shimmer {
   from { background-position: 100% 0; }
