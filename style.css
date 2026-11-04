@@ -500,6 +500,60 @@ body {
   color: var(--muted);
 }
 
+/* Lien discret vers les mentions légales */
+.legal-link {
+  margin: 22px 0 0;
+  font-family: var(--caps);
+  font-size: .62rem;
+  letter-spacing: .14em;
+}
+.legal-link.reveal { animation-delay: 1.85s; }
+.legal-link a {
+  color: var(--muted);
+  opacity: .7;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: opacity .2s, border-color .2s;
+}
+.legal-link a:hover,
+.legal-link a:focus-visible { opacity: 1; border-color: var(--line); }
+
+/* Page des mentions légales */
+.legal-page {
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(200, 87, 30, .3), transparent 60%),
+    linear-gradient(180deg, #21101f 0%, #3f1a36 35%, var(--wine) 75%, var(--night) 100%);
+  background-attachment: fixed;
+  background-color: var(--night);
+}
+.legal {
+  max-width: 720px;
+  text-align: left;
+}
+.legal h1 {
+  margin: 0 0 8px;
+  font-family: var(--caps);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 5vw, 1.9rem);
+  color: var(--gold);
+  text-align: center;
+}
+.legal h2 {
+  margin: 30px 0 8px;
+  font-family: var(--caps);
+  font-weight: 400;
+  font-size: .9rem;
+  letter-spacing: .12em;
+  color: var(--gold);
+}
+.legal p {
+  margin: 0 0 10px;
+  font-size: 1.08rem;
+  line-height: 1.55;
+}
+.legal p a:not(.btn) { color: var(--gold); }
+.legal-back { margin-top: 32px !important; text-align: center; }
+
 @media (max-width: 420px) {
   .card { padding: 50px 18px 40px; }
   .countdown { gap: 8px; }

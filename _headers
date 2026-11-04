@@ -1,0 +1,5 @@
+# En-têtes HTTP appliqués par Cloudflare Pages.
+# Demande aux moteurs de recherche de ne référencer aucun fichier du site
+# (pages, polices, fichier calendrier…), en plus de la balise meta des pages.
+/*
+  X-Robots-Tag: noindex, nofollow, noarchive
